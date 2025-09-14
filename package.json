@@ -1,0 +1,21 @@
+{
+  "name": "liminality",
+  "version": "1.0.0",
+  "description": "A realtime text chat app designed with small scale features such as texting and image sharing.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnimeshJha117/Liminality.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnimeshJha117/Liminality/issues"
+  },
+  "homepage": "https://github.com/AnimeshJha117/Liminality#readme"
+}
