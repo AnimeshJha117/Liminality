@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@property --border-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: "<angle>";
+}
+
+.input{
+    @apply w-full px-3 py-2 rounded-md bg-white/30 backdrop-blur-md border border-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400 text-black;
+}
+
+.auth-input-label{
+    @apply block text-sm font-medium mb-1 text-black drop-shadow-md;
+}
+
+.auth-btn{
+    @apply w-full py-2 mt-4 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600 transition;
+}
