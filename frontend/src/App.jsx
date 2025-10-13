@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      <video
+      {/*<video
         autoPlay
         muted
         loop
@@ -26,11 +26,17 @@ function App() {
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
         <source
-          src="/black-hole.mp4"
+          src="https://res.cloudinary.com/dhnvnf5cj/video/upload/v1760277339/black-hole_xzkzke.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag
-      </video>
+      </video>*/}
+
+      <img 
+        src="https://res.cloudinary.com/dhnvnf5cj/image/upload/v1760278562/black-hole_mxdwti.png" 
+        alt="black-hole" 
+        className="absolute top-0 left-0 w-full h-full object-cover" 
+      />
 
       <Routes>
         <Route path="/" element={authUser ? <ChatPage /> : <Navigate to={"/login"} />} />
