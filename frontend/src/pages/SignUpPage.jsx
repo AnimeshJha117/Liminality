@@ -12,31 +12,31 @@ function SignUpPage() {
   };
   return <div className="relative flex items-center justify-center min-h-screen">
     <AnimatedBorderContainer>
-      <div className="relative z-10 w-[500px] p-8 rounded-xl bg-white/20 backdrop-blur-md shadow-lg">
-        <h1 className="text-center text-3xl mb-6 text-black drop-shadow-md">Welcome to Liminality</h1>
-        <p className="text-center text-30px text-black/80 mb-6">Register to obtain clearance</p>
+      <div className="relative z-10 w-[500px] p-8 rounded-xl bg-black/20 backdrop-blur-md shadow-lg">
+        <h1 className="text-center text-3xl mb-6 text-white drop-shadow-md">Welcome to Liminality</h1>
+        <p className="text-center text-30px text-white/80 mb-6">Register to obtain clearance</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/*Username*/}
+          {/Username/}
           <div>
             <label className="auth-input-label">Username</label>
             <input type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} className="input" />
           </div>
 
-          {/*Email*/}
+          {/Email/}
           <div>
             <label className="auth-input-label">Email</label>
             <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="input" />
           </div>
 
-          {/*Password*/}
+          {/Password/}
           <div>
             <label className="auth-input-label">Password</label>
             <input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="input" />
           </div>
 
-          {/*Create button*/}
+          {/Create button/}
           <button type="submit" className="auth-btn" disabled={isSigningUp}>
             {isSigningUp ? (
               <LoaderIcon className="w-full h-5 animate-spin text-center" />
@@ -45,8 +45,8 @@ function SignUpPage() {
             )}
           </button>
 
-          {/*Already registered*/}
-          <div className="text-center text-50px text-black/80 mt-4 drop-shadow-md">
+          {/Already registered/}
+          <div className="text-center text-50px text-white/80 mt-4 drop-shadow-md">
             Already have an account?{" "}
             <a
               href="/login"
