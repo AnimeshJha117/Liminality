@@ -10,18 +10,15 @@ import { Toaster } from "react-hot-toast";
 function App() {
   const { checkAuth, isCheckingAuth, authUser } = useAuthStore();
 
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+  useEffect(() => {checkAuth();}, [checkAuth]);
 
   if (isCheckingAuth) return <PageLoader />;
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-
       <img 
         src="https://res.cloudinary.com/dhnvnf5cj/image/upload/v1761408989/1_qvrrpq.png" 
-        alt="black-hole" 
+        alt="oni" 
         className="absolute top-0 left-0 w-full h-full object-cover" 
       />
 

@@ -28,7 +28,7 @@ export const useChatStore = create((set, get) => ({
         set({ isUsersLoading: true });
 
         try {
-            const res = await axiosInstance.get(/messages/contacts?username=${encodeURIComponent(name)});
+            const res = await axiosInstance.get(`/messages/contacts?username=${encodeURIComponent(name)}`);
             set({ allContacts: [res.data] }); // single user
         } catch (error) {
             const msg = error?.response?.data?.message || "No user found";
@@ -54,7 +54,7 @@ export const useChatStore = create((set, get) => ({
     getMessagesByUserId: async (userId) => {
         set({ isMessagesLoading: true });
         try {
-            const res = await axiosInstance.get(/messages/${userId});
+            const res = await axiosInstance.get(`/messages/${userId}`);
             set({ messages: res.data });
         } catch (error) {
             toast.error(error.response?.data?.message || "Something went wrong");
@@ -67,7 +67,7 @@ export const useChatStore = create((set, get) => ({
         const { selectedUser, messages } = get();
         const { authUser } = useAuthStore.getState();
 
-        const tempId = temp-${Date.now()};
+        const tempId = `temp-${Date.now()}`;
 
         const optimisticMessage = {
             _id: tempId,
@@ -82,7 +82,7 @@ export const useChatStore = create((set, get) => ({
         set({ messages: [...messages, optimisticMessage] });
 
         try {
-            const res = await axiosInstance.post(/messages/send/${selectedUser._id}, messageData);
+            const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
             set({ messages: messages.concat(res.data) });
         } catch (error) {
             // remove optimistic message on failure

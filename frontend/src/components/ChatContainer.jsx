@@ -41,7 +41,7 @@ function ChatContainer({ setSidebarOpen }) {
             {messages.map((msg) => (
               <div
                 key={msg._id}
-                className={chat ${msg.senderId === authUser._id ? "chat-end" : "chat-start"}}
+                className={`chat ${msg.senderId === authUser._id ? "chat-end" : "chat-start"}`}
               >
                 <div
                   className={`chat-bubble relative ${
@@ -63,7 +63,7 @@ function ChatContainer({ setSidebarOpen }) {
                 </div>
               </div>
             ))}
-            {/scroll target/}
+            {/*scroll target*/}
             <div ref={messageEndRef} />
           </div>
         ) : isMessagesLoading ? (

@@ -22,10 +22,10 @@ function ChatHeader({ setSidebarOpen }) {
     <div className="p-4 sm:p-6 border-b border-slate-700/50 overflow-hidden">
       <div className="flex items-center justify-between gap-4">
 
-        {/Left/}
+        {/*Left*/}
         <div className="flex items-center gap-1 min-w-0 flex-1">
-          {/Avatar/}
-          <div className={avatar ${isOnline ? "online" : "offline"}}>
+          {/*Avatar*/}
+          <div className={`avatar ${isOnline ? "online" : "offline"}`}>
             <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
               <img
                 src={selectedUser.profilePic || "/avatar.png"}
@@ -35,7 +35,7 @@ function ChatHeader({ setSidebarOpen }) {
             </div>
           </div>
 
-          {/Username and Status/}
+          {/*Username and Status*/}
           <div className="flex flex-col min-w-0 ml-1">
             <h3
               className="text-white font-medium text-lg truncate"

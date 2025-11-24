@@ -28,9 +28,9 @@ function ProfileHeader() {
     return (
         <div className="p-4 sm:p-6 border-b border-slate-700/50 overflow-hidden">
             <div className="flex items-center justify-between gap-4">
-                {/LEFT/}
+                {/*LEFT*/}
                 <div className="flex items-center gap-1 min-w-0 flex-1">
-                    {/Avatar/}
+                    {/*Avatar*/}
                     <div className="avatar online">
                         <button
                             type="button"
@@ -56,7 +56,7 @@ function ProfileHeader() {
                         />
                     </div>
 
-                    {/USERNAME + STATUS/}
+                    {/*USERNAME + STATUS*/}
                     <div className="flex flex-col min-w-0">
                         <h3
                             className="text-white font-medium text-lg truncate"
@@ -68,9 +68,9 @@ function ProfileHeader() {
                     </div>
                 </div>
 
-                {/RIGHT/}
+                {/*RIGHT*/}
                 <div className="flex items-center gap-3 flex-shrink-0">
-                    {/Logout/}
+                    {/*Logout*/}
                     <button
                         onClick={logout}
                         className="p-0.5 rounded-md hover:bg-white/5 transition-transform hover:scale-105"
@@ -79,7 +79,7 @@ function ProfileHeader() {
                         <LogOutIcon className="w-5 h-5 text-white" />
                     </button>
 
-                    {/Sound/}
+                    {/*Sound*/}
                     <button
                         onClick={() => {
                             try {
