@@ -12,7 +12,13 @@ export const signup = async (req, res) => {
             return res.status(400).json({ message: "Please fill all fields correctly." });
         }
 
-        if (password.length < 6) {
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.status(400).json({ message: "Username already exists." });
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{6,}$/;
+        if (!passwordRegex.test(password)) {
             return res.status(400).json({ message: "Password is too weak." });
         }
 
@@ -60,13 +66,13 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    const { email, password } = req.body
+    const { emailOrusername, password } = req.body
 
-    if (!email || !password) {
-        return res.status(400).json({ message: "Email and password are required" });
+    if (!emailOrusername || !password) {
+        return res.status(400).json({ message: "Email or username and password are required" });
     }
     try {
-        const user = await User.findOne({ email })
+        const user = await User.findOne({$or: [{ email: emailOrusername }, { username: emailOrusername }],});
         if (!user) return res.status(400).json({ message: "Invalid credentials" });
         const isPasswordCorrect = await bcrypt.compare(password, user.password)
         if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
@@ -90,20 +96,20 @@ export const logout = (_, res) => {
 };
 
 export const updateProfile = async (req, res) => {
-  try {
-    const { profilePic } = req.body;
-    if (!profilePic) return res.status(400).json({ message: "Profile picture is required" });
-    const userId = req.user._id;
-    const uploadResponse = await cloudinary.uploader.upload(profilePic);
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { profilePic: uploadResponse.secure_url },
-      { new: true }
-    );
+    try {
+        const { profilePic } = req.body;
+        if (!profilePic) return res.status(400).json({ message: "Profile picture is required" });
+        const userId = req.user._id;
+        const uploadResponse = await cloudinary.uploader.upload(profilePic);
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { profilePic: uploadResponse.secure_url },
+            { new: true }
+        );
 
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    console.log("Error in update profile:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        console.log("Error in update profile:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
 };

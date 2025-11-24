@@ -1,14 +1,46 @@
 import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 import Message from "../models/Message.js";
 import User from "../models/User.js";
 
-export const getAllContacts = async (requestAnimationFrame, res) => {
-    try {
-        const loggedInUserId = requestAnimationFrame.user._id;
+export const getAllContacts = async (req, res) => {
+    {/*try {
+        const loggedInUserId = req.user._id;
         const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
         res.status(200).json(filteredUsers);
     } catch (error) {
         console.log("Error in getAllContacts: ", error);
+        res.status(500).json({ message: "Server error" });
+    }*/}
+
+    try {
+        const username = (req.query.username || "").trim();
+
+        if (!username) {
+            return res.status(400).json({ message: "Username query is required" });
+        }
+
+        // Escape regex characters (security)
+        const escaped = username.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+        // EXACT MATCH (case-insensitive)
+        const user = await User.findOne({
+            username: new RegExp(`^${escaped}$`, "i")
+        }).select("-password");
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        //cannot allow searching yourself
+        if (req.user && String(req.user._id) === String(user._id)) {
+            return res.status(400).json({ message: "Cannot search yourself" });
+        }
+
+        res.status(200).json(user);
+
+    } catch (error) {
+        console.error("Error in searchUserByExactUsername:", error);
         res.status(500).json({ message: "Server error" });
     }
 };
@@ -58,6 +90,12 @@ export const sendMessage = async (req, res) => {
             senderId, receiverId, text, image: imageUrl,
         });
         await newMessage.save();
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
+
         res.status(201).json(newMessage);
     } catch (error) {
         console.log("Error in sendMessage controller: ", error.message);
