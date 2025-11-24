@@ -19,19 +19,19 @@ function LoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/Email/}
+          {/*Email*/}
           <div>
             <label className="auth-input-label">Email / Username</label>
             <input type="text" value={formData.emailOrusername} onChange={(e) => setFormData({ ...formData, emailOrusername: e.target.value })} className="input" />
           </div>
 
-          {/Password/}
+          {/*Password*/}
           <div>
             <label className="auth-input-label">Password</label>
             <input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="input" />
           </div>
 
-          {/Create button/}
+          {/*Create button*/}
           <button type="submit" className="auth-btn" disabled={isLoggingIn}>
             {isLoggingIn ? (
               <LoaderIcon className="w-full h-5 animate-spin text-center" />
@@ -40,7 +40,7 @@ function LoginPage() {
             )}
           </button>
 
-          {/Already registered/}
+          {/*Already registered*/}
           <div className="text-center text-50px text-white/80 mt-4 drop-shadow-md">
             Don't have an account?{" "}
             <a
