@@ -18,25 +18,25 @@ function SignUpPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/Username/}
+          {/*Username*/}
           <div>
             <label className="auth-input-label">Username</label>
             <input type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} className="input" />
           </div>
 
-          {/Email/}
+          {/*Email*/}
           <div>
             <label className="auth-input-label">Email</label>
             <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="input" />
           </div>
 
-          {/Password/}
+          {/*Password*/}
           <div>
             <label className="auth-input-label">Password</label>
             <input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="input" />
           </div>
 
-          {/Create button/}
+          {/*Create button*/}
           <button type="submit" className="auth-btn" disabled={isSigningUp}>
             {isSigningUp ? (
               <LoaderIcon className="w-full h-5 animate-spin text-center" />
@@ -45,7 +45,7 @@ function SignUpPage() {
             )}
           </button>
 
-          {/Already registered/}
+          {/*Already registered*/}
           <div className="text-center text-50px text-white/80 mt-4 drop-shadow-md">
             Already have an account?{" "}
             <a
