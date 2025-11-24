@@ -12,7 +12,7 @@ function ProfileHeader() {
     const fileInputRef = useRef(null);
 
     const handleImageUpload = (e) => {
-        const file = e.target.files[0];
+        const file = e.target.files?.[0];
         if (!file) return;
 
         const reader = new FileReader();
@@ -26,86 +26,75 @@ function ProfileHeader() {
     };
 
     return (
-        <div className="p-6 border-b border-slate-700/50">
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    {/*Profile Picture*/}
+        <div className="p-4 sm:p-6 border-b border-slate-700/50 overflow-hidden">
+            <div className="flex items-center justify-between gap-4">
+                {/LEFT/}
+                <div className="flex items-center gap-1 min-w-0 flex-1">
+                    {/Avatar/}
                     <div className="avatar online">
                         <button
-                            className="size-16 rounded-full overflow-hidden relative group"
-                            onClick={() => fileInputRef.current.click()}
+                            type="button"
+                            className="w-16 h-16 rounded-full overflow-hidden relative group flex-shrink-0"
+                            onClick={() => fileInputRef.current?.click()}
                         >
                             <img
                                 src={selectedImg || authUser.profilePic || "/avatar.png"}
-                                alt="User image"
-                                className="size-full object-cover"
+                                alt="User avatar"
+                                className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                                 <span className="text-white text-xs">Change</span>
                             </div>
                         </button>
 
                         <input
                             type="file"
+                            className="hidden"
                             accept="image/*"
                             ref={fileInputRef}
                             onChange={handleImageUpload}
-                            className="hidden"
                         />
                     </div>
 
-                    {/*Username Online*/}
-                    <div>
-                        <h3 className="text-black 
-                            drop-shadow-[0_0_3px_rgba(60,171,255,0.8)] 
-                            hover:drop-shadow-[0_0_6px_rgba(60,171,255,1)] 
-                            font-medium 
-                            text-lg 
-                            max-w-[180px] 
-                            truncate 
-                            transition-all">
+                    {/USERNAME + STATUS/}
+                    <div className="flex flex-col min-w-0">
+                        <h3
+                            className="text-white font-medium text-lg truncate"
+                            title={authUser.username}
+                        >
                             {authUser.username}
                         </h3>
-                        <p className="text-slate-400 text-sm">Online</p>
+                        <p className="text-slate-400 text-sm truncate">Online</p>
                     </div>
                 </div>
 
-                {/*Buttons*/}
-                <div className="flex gap-4 items-center">
-                    {/*Logout*/}
+                {/RIGHT/}
+                <div className="flex items-center gap-3 flex-shrink-0">
+                    {/Logout/}
                     <button
-                        className="transition-transform hover:scale-105"
                         onClick={logout}
+                        className="p-0.5 rounded-md hover:bg-white/5 transition-transform hover:scale-105"
+                        title="Logout"
                     >
-                        <LogOutIcon className="size-5 
-                            text-black 
-                            drop-shadow-[0_0_3px_rgba(60,171,255,0.8)] 
-                            hover:drop-shadow-[0_0_5px_rgba(60,171,255,1)]
-                            transition-all" />
+                        <LogOutIcon className="w-5 h-5 text-white" />
                     </button>
 
-                    {/*Sounds*/}
+                    {/Sound/}
                     <button
-                        className="text-slate-400 hover:text-slate-200 transition-colors"
                         onClick={() => {
-                            // play click sound before toggling
-                            mouseClickSound.currentTime = 0; // reset to start
-                            mouseClickSound.play().catch((error) => console.log("Audio play failed:", error));
+                            try {
+                                mouseClickSound.currentTime = 0;
+                                mouseClickSound.play();
+                            } catch { }
                             toggleSound();
                         }}
+                        className="p-0.5 rounded-md hover:bg-white/5 text-slate-400 hover:text-slate-200 transition-colors hidden xs:inline-flex sm:inline-flex"
+                        title={isSoundEnabled ? "Mute" : "Unmute"}
                     >
                         {isSoundEnabled ? (
-                            <Volume2Icon className="size-5 
-                            text-black 
-                            drop-shadow-[0_0_3px_rgba(60,171,255,0.8)] 
-                            hover:drop-shadow-[0_0_5px_rgba(60,171,255,1)]
-                            transition-all" />
+                            <Volume2Icon className="w-5 h-5 text-white" />
                         ) : (
-                            <VolumeOffIcon className="size-5 
-                            text-black 
-                            drop-shadow-[0_0_3px_rgba(60,171,255,0.8)] 
-                            hover:drop-shadow-[0_0_5px_rgba(60,171,255,1)]
-                            transition-all" />
+                            <VolumeOffIcon className="w-5 h-5 text-slate-300" />
                         )}
                     </button>
                 </div>
