@@ -81,7 +81,7 @@ function ChatPage() {
         <aside
           className={`
             fixed inset-y-0 left-0 z-30 w-80 transform transition-transform duration-300 ease-in-out
-            bg-black/30 backdrop-blur-sm flex flex-col
+            bg-black/30 backdrop-blur-sm flex flex-col min-h-0
             ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
             lg:relative lg:translate-x-0 lg:static
           `}
@@ -117,9 +117,9 @@ function ChatPage() {
         )}
 
         {/*main area*/}
-        <div className="flex-1 flex flex-col bg-black/25 backdrop-blur-sm">
+        <div className="flex-1 min-h-0 flex flex-col bg-black/25 backdrop-blur-sm">
           {/*chat area*/}
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 min-h-0 flex flex-col">
             {selectedUser ? (<ChatContainer setSidebarOpen={setSidebarOpen} />) : (<NoConversationPlaceholder onOpenSidebar={() => setSidebarOpen(true)}
             />
             )}
