@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dhnvnf5cj/image/upload/v1761408989/1_qvrrpq.png" 
+        src="https://res.cloudinary.com/dhnvnf5cj/image/upload/v1764297852/photo-1712397943847-e104395a1a8b_htnk9r.jpg" 
         alt="oni" 
         className="absolute top-0 left-0 w-full h-full object-cover" 
       />
